@@ -1,2 +1,2 @@
-# Earthmover-Asist.
+# Earthmover Assist.
 Professional earthmoving machine diagnostics.
