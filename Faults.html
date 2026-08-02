@@ -1,91 +1,81 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fault Code Search - Earthmover Assist</title>
-<link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-<header>
-<h1>⚙️ Earthmover Assist</h1>
-
-<nav>
-<a href="index.html">Home</a>
-<a href="faults.html">Fault Codes</a>
-<a href="machines.html">Machines</a>
-<a href="manuals.html">Manuals</a>
-<a href="community.html">Community</a>
-<a href="contact.html">Contact</a>
-</nav>
-
-</header>
-
-<section class="hero">
-
-<h2>Fault Code Search</h2>
-
-<input type="text" id="faultSearch" placeholder="Enter MID, PID, SID, FMI or fault code">
-
-<button onclick="searchFault()">Search</button>
-
-<div id="result"></div>
-
-</section>
-
-<script>
-
-function searchFault(){
-
-let code=document.getElementById("faultSearch").value.toUpperCase();
-
-let result=document.getElementById("result");
-
-if(code=="MID 128 PID 94 FMI 1"){
-
-result.innerHTML=`
-<h3>Fuel Pressure Fault</h3>
-
-<b>Possible Causes</b>
-
-<ul>
-
-<li>Blocked fuel filters</li>
-
-<li>Faulty fuel pressure sensor</li>
-
-<li>Weak lift pump</li>
-
-<li>Damaged wiring</li>
-
-</ul>
-
-<b>Recommended Checks</b>
-
-<ol>
-
-<li>Replace fuel filters</li>
-
-<li>Measure fuel pressure</li>
-
-<li>Inspect wiring</li>
-
-<li>Check sensor connector</li>
-
-</ol>
-`;
-
-}else{
-
-result.innerHTML="<h3>No results found.</h3><p>This fault will be added to the database.</p>";
-
+{
+  "MID 128 PID 94 FMI 1": {
+    "machine": "Volvo A40F/A40G",
+    "title": "Fuel Pressure Low",
+    "description": "Fuel pressure below specification.",
+    "possible_causes": [
+      "Blocked fuel filter",
+      "Weak lift pump",
+      "Air in fuel system",
+      "Faulty fuel pressure sensor"
+    ],
+    "recommended_checks": [
+      "Replace fuel filters",
+      "Measure fuel pressure",
+      "Inspect fuel lines",
+      "Test pressure sensor"
+    ]
+  },
+  "MID 128 PID 100 FMI 1": {
+    "machine": "Volvo A40F/A40G",
+    "title": "Engine Oil Pressure Low",
+    "description": "Engine oil pressure is below specification.",
+    "possible_causes": [
+      "Low oil level",
+      "Faulty oil pump",
+      "Pressure sensor fault"
+    ],
+    "recommended_checks": [
+      "Check oil level",
+      "Inspect oil pump",
+      "Test pressure sensor"
+    ]
+  },
+  "MID 128 PID 110 FMI 0": {
+    "machine": "Volvo A40F/A40G",
+    "title": "Coolant Temperature High",
+    "description": "Engine coolant temperature too high.",
+    "possible_causes": [
+      "Low coolant",
+      "Blocked radiator",
+      "Faulty thermostat",
+      "Water pump failure"
+    ],
+    "recommended_checks": [
+      "Check coolant",
+      "Clean radiator",
+      "Test thermostat",
+      "Inspect water pump"
+    ]
+  },
+  "MID 144 PSID 96 FMI 1": {
+    "machine": "Volvo A40F/A40G",
+    "title": "Hydraulic Oil Temperature High",
+    "description": "Hydraulic oil overheating.",
+    "possible_causes": [
+      "Low hydraulic oil",
+      "Blocked cooler",
+      "Cooling fan fault"
+    ],
+    "recommended_checks": [
+      "Check oil level",
+      "Clean cooler",
+      "Inspect fan"
+    ]
+  },
+  "MID 136 SID 70 FMI 5": {
+    "machine": "Volvo A40F/A40G",
+    "title": "Transmission Solenoid Fault",
+    "description": "Electrical fault in transmission solenoid.",
+    "possible_causes": [
+      "Open circuit",
+      "Damaged wiring",
+      "Faulty solenoid"
+    ],
+    "recommended_checks": [
+      "Inspect wiring",
+      "Measure resistance",
+      "Replace solenoid if required"
+    ]
+  }
 }
-
-}
-
-</script>
-
-</body>
-</html>
