@@ -1,69 +1,76 @@
 const faults = {
   "MID 128 PID 94 FMI 1": {
-    title: "Fuel Pressure Fault",
-    machine: "Volvo Engine",
-    causes: [
-      "Blocked fuel filter",
-      "Faulty fuel pressure sensor",
-      "Weak lift pump",
-      "Air in fuel system"
-    ],
-    repair: [
-      "Replace fuel filters",
-      "Check fuel pressure",
-      "Inspect fuel lines for leaks",
-      "Test fuel pressure sensor"
-    ]
+    title: "Fuel Pressure Low",
+    machine: "Volvo",
+    cause: "Fuel pressure below specification.",
+    action: "Check fuel filters, fuel pump, pressure sensor and fuel lines."
   },
 
-  "OVERHEAT": {
-    title: "Engine Overheating",
-    machine: "All Machines",
-    causes: [
-      "Low coolant level",
-      "Blocked radiator",
-      "Faulty thermostat",
-      "Water pump failure"
-    ],
-    repair: [
-      "Check coolant level",
-      "Clean radiator",
-      "Replace thermostat if faulty",
-      "Inspect water pump"
-    ]
+  "MID 128 PID 100 FMI 1": {
+    title: "Engine Oil Pressure Low",
+    machine: "Volvo",
+    cause: "Low engine oil pressure detected.",
+    action: "Check engine oil level, oil pump, pressure sensor and engine bearings."
+  },
+
+  "MID 128 PID 110 FMI 0": {
+    title: "Coolant Temperature High",
+    machine: "Volvo",
+    cause: "Engine overheating.",
+    action: "Check coolant level, radiator, fan, thermostat and water pump."
+  },
+
+  "MID 144 PSID 96 FMI 1": {
+    title: "Hydraulic Oil Temperature High",
+    machine: "Volvo",
+    cause: "Hydraulic oil overheating.",
+    action: "Inspect hydraulic cooler, fan, oil level and filters."
+  },
+
+  "MID 136 SID 70 FMI 5": {
+    title: "Transmission Solenoid Fault",
+    machine: "Volvo",
+    cause: "Transmission solenoid electrical fault.",
+    action: "Check wiring, connectors and replace faulty solenoid if required."
   }
 };
 
 function searchFault() {
 
-  let search = document.getElementById("searchBox").value.trim().toUpperCase();
+    const input = document
+        .getElementById("searchInput")
+        .value
+        .trim()
+        .toUpperCase();
 
-  let result = document.getElementById("result");
+    const result = document.getElementById("result");
 
-  if (faults[search]) {
+    if (faults[input]) {
 
-    let fault = faults[search];
+        result.innerHTML = `
+        <div style="background:white;color:black;padding:20px;border-radius:10px;text-align:left;">
+            <h2>${faults[input].title}</h2>
 
-    result.innerHTML = `
-      <h2>${fault.title}</h2>
-      <p><b>Machine:</b> ${fault.machine}</p>
+            <p><strong>Machine:</strong> ${faults[input].machine}</p>
 
-      <h3>Possible Causes</h3>
-      <ul>
-        ${fault.causes.map(c => `<li>${c}</li>`).join("")}
-      </ul>
+            <p><strong>Fault Code:</strong> ${input}</p>
 
-      <h3>Recommended Repairs</h3>
-      <ol>
-        ${fault.repair.map(r => `<li>${r}</li>`).join("")}
-      </ol>
-    `;
+            <p><strong>Cause:</strong><br>${faults[input].cause}</p>
 
-  } else {
+            <p><strong>Recommended Action:</strong><br>${faults[input].action}</p>
 
-    result.innerHTML = `
-      <h2>No Results Found</h2>
-      <p>This fault has not yet been added to the database.</p>
-    `;
-  }
+        </div>
+        `;
+
+    } else {
+
+        result.innerHTML = `
+        <div style="background:white;color:black;padding:20px;border-radius:10px;">
+            <h2>No Fault Found</h2>
+            <p>This fault code has not yet been added to the database.</p>
+        </div>
+        `;
+
+    }
+
 }
