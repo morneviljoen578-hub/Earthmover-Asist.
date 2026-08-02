@@ -2,68 +2,76 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Earthmover Assist</title>
-<link rel="stylesheet" href="style.css">
+<style>
+body{margin:0;font-family:Arial,sans-serif;background:#f4b400}
+header{background:#111;color:#fff;padding:20px;text-align:center}
+nav a{color:#fff;margin:0 10px;text-decoration:none;font-weight:bold}
+main{padding:20px;max-width:900px;margin:auto}
+input{width:100%;padding:12px;font-size:18px}
+button{margin-top:10px;padding:12px 24px;font-size:18px;background:#111;color:#fff;border:none}
+.card{background:#fff;border-radius:10px;padding:16px;margin-top:20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:15px}
+.machine{background:#fff;padding:20px;border-radius:10px;text-align:center;font-weight:bold}
+</style>
 </head>
-
 <body>
-
 <header>
-    <h1>⚙️ Earthmover Assist</h1>
-    <p>Diagnose Smarter • Repair Faster • Keep Machines Moving</p>
-
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="faults.html">Fault Codes</a>
-        <a href="machines.html">Machines</a>
-        <a href="manuals.html">Manuals</a>
-        <a href="community.html">Community</a>
-        <a href="contact.html">Contact</a>
-    </nav>
+<h1>⚙ Earthmover Assist</h1>
+<p>Diagnose Smarter • Repair Faster • Keep Machines Moving</p>
+<nav>
+<a href="#">Home</a>
+<a href="#">Fault Codes</a>
+<a href="#">Machines</a>
+<a href="#">Manuals</a>
+<a href="#">Community</a>
+</nav>
 </header>
-
-<section class="hero">
-
-<h2>Search Fault Codes or Symptoms</h2>
-
-<input type="text" id="searchBox" placeholder="Example: MID 128 PID 94 FMI 1">
-
+<main>
+<h2>Search Fault Codes</h2>
+<input id="searchInput" placeholder="Example: MID 128 PID 94 FMI 1">
 <button onclick="searchFault()">Search</button>
-
-<p id="result"></p>
-
-</section>
-
-<section>
+<div id="result" class="card">Enter a fault code above.</div>
 
 <h2>Supported Machines</h2>
-
-<div class="cards">
-
-<div class="card">Volvo</div>
-<div class="card">Bell</div>
-<div class="card">Hitachi</div>
-<div class="card">SANY</div>
-<div class="card">Caterpillar</div>
-<div class="card">Komatsu</div>
-    <input id="searchInput" placeholder="Example: MID 128 PID 94 FMI 1">
-
-<button onclick="searchFault()">Search</button>
-
-<div id="result"></div>
-
+<div class="grid">
+<div class="machine">Volvo</div>
+<div class="machine">Bell</div>
+<div class="machine">Caterpillar</div>
+<div class="machine">Hitachi</div>
+<div class="machine">Komatsu</div>
+<div class="machine">John Deere</div>
 </div>
-
-</section>
-
-<footer>
-
-© 2026 Earthmover Assist
-
-</footer>
-
-<script src="script.js"></script>
-
+</main>
+<script>
+const faults={
+"MID 128 PID 94 FMI 1":{
+title:"Fuel Pressure Low",
+machine:"Volvo",
+cause:"Fuel pressure below specification.",
+action:"Check filters, pump, fuel lines and pressure sensor."
+},
+"MID 128 PID 100 FMI 1":{
+title:"Engine Oil Pressure Low",
+machine:"Volvo",
+cause:"Low engine oil pressure.",
+action:"Check oil level, oil pump and pressure sensor."
+}
+};
+function searchFault(){
+const code=document.getElementById("searchInput").value.trim().toUpperCase();
+const r=document.getElementById("result");
+if(faults[code]){
+const f=faults[code];
+r.innerHTML=`<h3>${f.title}</h3>
+<p><b>Machine:</b> ${f.machine}</p>
+<p><b>Fault Code:</b> ${code}</p>
+<p><b>Cause:</b> ${f.cause}</p>
+<p><b>Recommended Action:</b> ${f.action}</p>`;
+}else{
+r.innerHTML="<h3>No Fault Found</h3><p>This fault code is not yet in the database.</p>";
+}}
+</script>
 </body>
 </html>
