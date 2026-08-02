@@ -1,81 +1,32 @@
-const faultDatabase = {
-  "MID 128 PID 94 FMI 1": {
-    title: "Fuel Pressure Low",
-    machine: "Volvo A40F / A40G",
-    description: "Fuel pressure below specification.",
-    possible_causes: [
-      "Blocked fuel filter",
-      "Weak lift pump",
-      "Air in fuel system",
-      "Faulty fuel pressure sensor"
-    ],
-    recommended_checks: [
-      "Replace fuel filters",
-      "Check fuel pressure",
-      "Inspect fuel lines",
-      "Test fuel pressure sensor"
-    ]
-  },
-
-  "MID 128 PID 100 FMI 1": {
-    title: "Engine Oil Pressure Low",
-    machine: "Volvo A40F / A40G",
-    description: "Engine oil pressure below specification.",
-    possible_causes: [
-      "Low oil level",
-      "Faulty oil pump",
-      "Pressure sensor fault"
-    ],
-    recommended_checks: [
-      "Check oil level",
-      "Inspect oil pump",
-      "Test oil pressure sensor"
-    ]
-  }
-};
-
-function searchFault() {
-
-    const input = document.getElementById("search").value.trim().toUpperCase();
-
-    const result = document.getElementById("result");
-
-    if (faultDatabase[input]) {
-
-        const fault = faultDatabase[input];
-
-        result.innerHTML = `
-            <div class="card">
-                <h2>${fault.title}</h2>
-
-                <p><b>Machine:</b> ${fault.machine}</p>
-
-                <p><b>Fault Code:</b> ${input}</p>
-
-                <p><b>Description:</b> ${fault.description}</p>
-
-                <h3>Possible Causes</h3>
-
-                <ul>
-                    ${fault.possible_causes.map(c=>`<li>${c}</li>`).join("")}
-                </ul>
-
-                <h3>Recommended Checks</h3>
-
-                <ol>
-                    ${fault.recommended_checks.map(c=>`<li>${c}</li>`).join("")}
-                </ol>
-
-            </div>
-        `;
-
-    } else {
-
-        result.innerHTML = `
-        <div class="card">
-            <h2>No Fault Found</h2>
-            <p>This fault code is not yet in the Earthmover Assist database.</p>
-        </div>
-        `;
-    }
-}
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Earthmover Assist</title>
+<link rel="stylesheet" href="style.css">
+</head><body>
+<header>
+<h1>⚙️ Earthmover Assist</h1>
+<p>Diagnose Smarter • Repair Faster • Keep Machines Moving</p>
+<nav>
+<a href="index.html">Home</a>
+<a href="#">Fault Codes</a>
+<a href="#">Machines</a>
+<a href="#">Manuals</a>
+<a href="#">Community</a>
+<a href="#">Contact</a>
+</nav>
+</header>
+<section class="hero">
+<h2>Earthmoving Equipment Diagnostics</h2>
+<p>Search fault codes, manuals and machine information.</p>
+<input id="search" placeholder="Example: MID 128 PID 94 FMI 1">
+<button>Search (Session 2)</button>
+</section>
+<section class="cards">
+<div class="card"><h3>🔍 Fault Codes</h3><p>Search by MID/PID/FMI.</p></div>
+<div class="card"><h3>🚜 Machines</h3><p>Browse supported manufacturers.</p></div>
+<div class="card"><h3>📚 Manuals</h3><p>Workshop manuals library.</p></div>
+<div class="card"><h3>👨‍🔧 Community</h3><p>Technician knowledge base.</p></div>
+</section>
+<footer>Earthmover Assist V1.0 - Session 1</footer>
+</body></html>
