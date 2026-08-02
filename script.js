@@ -1,25 +1,69 @@
-function searchFault(){
+const faults = {
+  "MID 128 PID 94 FMI 1": {
+    title: "Fuel Pressure Fault",
+    machine: "Volvo Engine",
+    causes: [
+      "Blocked fuel filter",
+      "Faulty fuel pressure sensor",
+      "Weak lift pump",
+      "Air in fuel system"
+    ],
+    repair: [
+      "Replace fuel filters",
+      "Check fuel pressure",
+      "Inspect fuel lines for leaks",
+      "Test fuel pressure sensor"
+    ]
+  },
 
-let search=document.getElementById("searchBox").value.toLowerCase();
+  "OVERHEAT": {
+    title: "Engine Overheating",
+    machine: "All Machines",
+    causes: [
+      "Low coolant level",
+      "Blocked radiator",
+      "Faulty thermostat",
+      "Water pump failure"
+    ],
+    repair: [
+      "Check coolant level",
+      "Clean radiator",
+      "Replace thermostat if faulty",
+      "Inspect water pump"
+    ]
+  }
+};
 
-let result=document.getElementById("result");
+function searchFault() {
 
-if(search.includes("mid 128")){
+  let search = document.getElementById("searchBox").value.trim().toUpperCase();
 
-result.innerHTML="<h3>Fuel System Fault</h3><p>Possible fuel pressure problem. Check filters, lift pump and fuel pressure sensor.</p>";
+  let result = document.getElementById("result");
 
-}
+  if (faults[search]) {
 
-else if(search.includes("overheat")){
+    let fault = faults[search];
 
-result.innerHTML="<h3>Engine Overheating</h3><p>Check coolant level, radiator, fan, thermostat and water pump.</p>";
+    result.innerHTML = `
+      <h2>${fault.title}</h2>
+      <p><b>Machine:</b> ${fault.machine}</p>
 
-}
+      <h3>Possible Causes</h3>
+      <ul>
+        ${fault.causes.map(c => `<li>${c}</li>`).join("")}
+      </ul>
 
-else{
+      <h3>Recommended Repairs</h3>
+      <ol>
+        ${fault.repair.map(r => `<li>${r}</li>`).join("")}
+      </ol>
+    `;
 
-result.innerHTML="<h3>No Results Found</h3><p>This fault is not yet in the database.</p>";
+  } else {
 
-}
-
+    result.innerHTML = `
+      <h2>No Results Found</h2>
+      <p>This fault has not yet been added to the database.</p>
+    `;
+  }
 }
