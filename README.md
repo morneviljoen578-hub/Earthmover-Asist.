@@ -1,88 +1,176 @@
-# Earthmover Assist.
-Professional earthmoving machine diagnostics.
-# ⚙️ Earthmover Assist
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Earthmover Assist</title>
 
-## Professional Earthmoving Machine Diagnostics
+<style>
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f4b400;
+    color:#111;
+}
 
-Earthmover Assist is an upcoming diagnostic platform designed to help technicians diagnose, repair and maintain earthmoving equipment.
+header{
+    background:#111;
+    color:white;
+    padding:20px;
+    text-align:center;
+}
 
----
+header h1{
+    margin:0;
+    font-size:40px;
+}
 
-## 🚜 Supported Manufacturers
+header p{
+    margin-top:10px;
+}
 
-- Volvo Construction Equipment
-- Bell Equipment
-- Caterpillar
-- Komatsu
-- Hitachi
-- Liebherr
-- John Deere
-- More coming soon...
+.hero{
+    text-align:center;
+    padding:40px 20px;
+}
 
----
+input{
+    width:80%;
+    max-width:500px;
+    padding:15px;
+    border-radius:8px;
+    border:none;
+    font-size:18px;
+}
 
-## 🔍 Features
+button{
+    margin-top:15px;
+    padding:15px 35px;
+    background:#111;
+    color:white;
+    border:none;
+    border-radius:8px;
+    font-size:18px;
+    cursor:pointer;
+}
 
-### Fault Code Search
-Search by:
-- MID
-- PID
-- SID
-- FMI
+section{
+    max-width:1000px;
+    margin:auto;
+    padding:30px;
+}
 
-### Symptom Diagnosis
-Diagnose faults using symptoms such as:
-- Engine won't start
-- Low power
-- Overheating
-- Hydraulic problems
-- Transmission faults
-- Electrical faults
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+}
 
-### Technical Library
-Access:
-- Service manuals
-- Wiring diagrams
-- Parts catalogues
-- Hydraulic schematics
+.card{
+    background:white;
+    border-radius:10px;
+    padding:20px;
+    text-align:center;
+    box-shadow:0 3px 10px rgba(0,0,0,.2);
+}
 
-### Parts Lookup
-Search by:
-- Part Number
-- Machine Model
-- Component Name
+footer{
+    background:#111;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+</style>
 
-### AI Diagnostic Assistant *(Coming Soon)*
-A guided assistant that helps technicians identify machine faults step by step.
+</head>
 
----
+<body>
 
-## 📱 Mobile Friendly
+<header>
 
-Earthmover Assist is being designed for technicians working in the field and workshops.
+<h1>⚙ Earthmover Assist</h1>
 
----
+<p>Diagnose Smarter • Repair Faster • Keep Machines Moving</p>
 
-## 🎯 Mission
+</header>
 
-> Diagnose Smarter. Repair Faster. Keep Machines Moving.
+<div class="hero">
 
----
+<h2>Search Fault Codes or Symptoms</h2>
 
-## 🚧 Development Status
+<input type="text" placeholder="Example: MID 128 PID 94 FMI 1">
 
-✅ Project Started
+<br>
 
-🟡 Website Development
+<button>Search</button>
 
-🟡 Fault Database
+</div>
 
-🟡 Volvo A40F/A40G
+<section>
 
-🟡 Bell Equipment
+<h2>Supported Machines</h2>
 
-🟡 Hitachi
+<div class="cards">
 
----
+<div class="card">
+<h3>Volvo</h3>
+<p>Articulated Dump Trucks</p>
+</div>
+
+<div class="card">
+<h3>Bell</h3>
+<p>Dump Trucks</p>
+</div>
+
+<div class="card">
+<h3>Hitachi</h3>
+<p>Excavators</p>
+</div>
+
+<div class="card">
+<h3>SANY</h3>
+<p>Excavators</p>
+</div>
+
+<div class="card">
+<h3>Caterpillar</h3>
+<p>Coming Soon</p>
+</div>
+
+<div class="card">
+<h3>Komatsu</h3>
+<p>Coming Soon</p>
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<h2>Coming Soon</h2>
+
+<ul>
+
+<li>Fault Code Database</li>
+
+<li>Workshop Solutions</li>
+
+<li>Parts Lookup</li>
+
+<li>Manual Library</li>
+
+<li>AI Diagnostics</li>
+
+</ul>
+
+</section>
+
+<footer>
 
 © 2026 Earthmover Assist
+
+</footer>
+
+</body>
+</html>
