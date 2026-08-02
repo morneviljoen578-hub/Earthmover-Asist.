@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fault Code Search - Earthmover Assist</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+<h1>⚙️ Earthmover Assist</h1>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="faults.html">Fault Codes</a>
+<a href="machines.html">Machines</a>
+<a href="manuals.html">Manuals</a>
+<a href="community.html">Community</a>
+<a href="contact.html">Contact</a>
+</nav>
+
+</header>
+
+<section class="hero">
+
+<h2>Fault Code Search</h2>
+
+<input type="text" id="faultSearch" placeholder="Enter MID, PID, SID, FMI or fault code">
+
+<button onclick="searchFault()">Search</button>
+
+<div id="result"></div>
+
+</section>
+
+<script>
+
+function searchFault(){
+
+let code=document.getElementById("faultSearch").value.toUpperCase();
+
+let result=document.getElementById("result");
+
+if(code=="MID 128 PID 94 FMI 1"){
+
+result.innerHTML=`
+<h3>Fuel Pressure Fault</h3>
+
+<b>Possible Causes</b>
+
+<ul>
+
+<li>Blocked fuel filters</li>
+
+<li>Faulty fuel pressure sensor</li>
+
+<li>Weak lift pump</li>
+
+<li>Damaged wiring</li>
+
+</ul>
+
+<b>Recommended Checks</b>
+
+<ol>
+
+<li>Replace fuel filters</li>
+
+<li>Measure fuel pressure</li>
+
+<li>Inspect wiring</li>
+
+<li>Check sensor connector</li>
+
+</ol>
+`;
+
+}else{
+
+result.innerHTML="<h3>No results found.</h3><p>This fault will be added to the database.</p>";
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
