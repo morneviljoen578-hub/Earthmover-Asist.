@@ -1,76 +1,62 @@
-const faults = {
-  "MID 128 PID 94 FMI 1": {
-    title: "Fuel Pressure Low",
-    machine: "Volvo",
-    cause: "Fuel pressure below specification.",
-    action: "Check fuel filters, fuel pump, pressure sensor and fuel lines."
-  },
+let faultDatabase = {};
 
-  "MID 128 PID 100 FMI 1": {
-    title: "Engine Oil Pressure Low",
-    machine: "Volvo",
-    cause: "Low engine oil pressure detected.",
-    action: "Check engine oil level, oil pump, pressure sensor and engine bearings."
-  },
-
-  "MID 128 PID 110 FMI 0": {
-    title: "Coolant Temperature High",
-    machine: "Volvo",
-    cause: "Engine overheating.",
-    action: "Check coolant level, radiator, fan, thermostat and water pump."
-  },
-
-  "MID 144 PSID 96 FMI 1": {
-    title: "Hydraulic Oil Temperature High",
-    machine: "Volvo",
-    cause: "Hydraulic oil overheating.",
-    action: "Inspect hydraulic cooler, fan, oil level and filters."
-  },
-
-  "MID 136 SID 70 FMI 5": {
-    title: "Transmission Solenoid Fault",
-    machine: "Volvo",
-    cause: "Transmission solenoid electrical fault.",
-    action: "Check wiring, connectors and replace faulty solenoid if required."
-  }
-};
+fetch("faults.json")
+  .then(response => response.json())
+  .then(data => {
+    faultDatabase = data;
+  })
+  .catch(error => {
+    console.error("Failed to load faults.json:", error);
+  });
 
 function searchFault() {
 
-    const input = document
-        .getElementById("searchInput")
-        .value
-        .trim()
-        .toUpperCase();
+  const input = document.getElementById("search").value.trim().toUpperCase();
+  const result = document.getElementById("result");
 
-    const result = document.getElementById("result");
+  if (input === "") {
+    result.innerHTML = "<div class='card'><h3>Please enter a fault code.</h3></div>";
+    return;
+  }
 
-    if (faults[input]) {
+  if (faultDatabase[input]) {
 
-        result.innerHTML = `
-        <div style="background:white;color:black;padding:20px;border-radius:10px;text-align:left;">
-            <h2>${faults[input].title}</h2>
+    const fault = faultDatabase[input];
 
-            <p><strong>Machine:</strong> ${faults[input].machine}</p>
+    result.innerHTML = `
+      <div class="card">
+        <h2>${fault.title}</h2>
 
-            <p><strong>Fault Code:</strong> ${input}</p>
+        <p><strong>Machine:</strong> ${fault.machine}</p>
 
-            <p><strong>Cause:</strong><br>${faults[input].cause}</p>
+        <p><strong>Fault Code:</strong> ${input}</p>
 
-            <p><strong>Recommended Action:</strong><br>${faults[input].action}</p>
+        <p><strong>Description:</strong> ${fault.description}</p>
 
-        </div>
-        `;
+        <h3>Possible Causes</h3>
 
-    } else {
+        <ul>
+          ${fault.possible_causes.map(c => `<li>${c}</li>`).join("")}
+        </ul>
 
-        result.innerHTML = `
-        <div style="background:white;color:black;padding:20px;border-radius:10px;">
-            <h2>No Fault Found</h2>
-            <p>This fault code has not yet been added to the database.</p>
-        </div>
-        `;
+        <h3>Recommended Checks</h3>
 
-    }
+        <ol>
+          ${fault.recommended_checks.map(c => `<li>${c}</li>`).join("")}
+        </ol>
+
+      </div>
+    `;
+
+  } else {
+
+    result.innerHTML = `
+      <div class="card">
+        <h2>No Fault Found</h2>
+        <p>The fault code <strong>${input}</strong> is not in the database yet.</p>
+      </div>
+    `;
+
+  }
 
 }
