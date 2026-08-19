@@ -7,7 +7,7 @@ Bell:{sourceStatus:"uploaded-manual",faults:[
 {code:"SPN 1702 FMI 3",title:"Bin Position Above Normal",system:"Bin position sensor / CCU",source:"BELL Fault_code_List.pdf"},
 {code:"SPN 1702 FMI 4",title:"Bin Position Below Normal",system:"Bin position sensor / CCU",source:"BELL Fault_code_List.pdf"}]},
 SANY:{sourceStatus:"uploaded-manual",faults:[
-{code:"CA559",title:"Common Rail Pressure Too Low",system:"Engine fuel system",source:"SANY fault-code document supplied in project"},
+{code:"CA559",title:"Common Rail Pressure Too Low",system:"Engine fuel system",description:"Common rail pressure too low.",source:"SANY fault-code document supplied in project"},
 {code:"CA449",title:"Common Rail Pressure Too High",system:"Engine fuel system",source:"SANY fault-code document supplied in project"},
 {code:"CA451",title:"Common Rail Pressure Sensor Feedback Too High",system:"Engine sensor circuit",source:"SANY fault-code document supplied in project"},
 {code:"CA452",title:"Common Rail Pressure Sensor Feedback Too Low",system:"Engine sensor circuit",source:"SANY fault-code document supplied in project"},
