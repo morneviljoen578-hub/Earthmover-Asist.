@@ -11,32 +11,35 @@
 <h1>⚙️ Earthmover Assist</h1>
 <p>Diagnose Smarter • Repair Faster • Keep Machines Moving</p>
 <nav>
-<a href="#">Home</a><a href="#faults">Fault Codes</a><a href="#machines">Machines</a>
-<a href="#">Manuals</a><a href="#">Community</a><a href="#">Contact</a>
+<a href="index.html">Home</a><a href="#faults">Fault Codes</a>
+<a href="machines.html">Machines</a><a href="manuals.html">Manuals</a>
+<a href="community.html">Community</a><a href="contact.html">Contact</a>
 </nav>
 </header>
 
 <section class="hero" id="faults">
 <h2>Search Fault Codes</h2>
-<p>Search by fault code, SPN/FMI, manufacturer or fault description.</p>
-<input id="search" type="search" placeholder="Example: CA559, SPN 1702 FMI 3, fuel pressure">
-<button onclick="searchFault()">Search</button>
+<p>Search by code, manufacturer, system or fault description.</p>
+<div>
+<input id="search" type="search" placeholder="Try CA559 or common rail pressure">
+<button id="searchButton" type="button">Search</button>
+</div>
 <div id="result" style="margin-top:20px"></div>
 </section>
 
-<div class="container" id="machines">
+<div class="container">
 <h2>Supported Manufacturers</h2>
 <div class="grid">
 <div class="card">Volvo</div><div class="card">Bell</div>
 <div class="card">Caterpillar</div><div class="card">Komatsu</div>
 <div class="card">Hitachi</div><div class="card">SANY</div>
 </div>
-<h2>About</h2>
-<div class="card">Earthmover Assist is being built as a diagnostic platform for earthmoving equipment with searchable fault codes, manuals and technician knowledge.</div>
 </div>
 
 <footer>Earthmover Assist v1.0 Foundation</footer>
-<script src="faults.js"></script>
-<script src="script.js"></script>
+
+<!-- IMPORTANT: faults.js must load BEFORE script.js -->
+<script src="./faults.js"></script>
+<script src="./script.js"></script>
 </body>
 </html>
