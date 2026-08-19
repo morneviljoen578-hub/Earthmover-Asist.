@@ -1,5 +1,14 @@
 function normalise(value){
-  return value.toLowerCase().replace(/[\-_]/g," ").replace(/\s+/g," ").trim();
+  return String(value || "").toLowerCase()
+    .replace(/[_-]/g," ")
+    .replace(/\s+/g," ")
+    .trim();
+}
+
+function escapeHtml(value){
+  return String(value ?? "").replace(/[&<>"']/g,function(ch){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[ch];
+  });
 }
 
 function searchFault(){
@@ -11,46 +20,44 @@ function searchFault(){
     return;
   }
 
-  const query=normalise(input);
-  const matches=faultDatabase.filter(fault=>{
-    const searchable=normalise([
-      fault.code,fault.title,fault.system,fault.manufacturer,
-      fault.description || "",fault.source || ""
-    ].join(" "));
-    return searchable.includes(query);
-  });
-
-  if(!matches.length){
-    result.innerHTML=`<div class="card"><h3>No fault found</h3>
-    <p><b>Search:</b> ${escapeHtml(input)}</p>
-    <p>This fault is not yet in the Earthmover Assist database.</p></div>`;
+  if(!Array.isArray(window.faultDatabase)){
+    result.innerHTML='<div class="card"><h3>Fault database did not load.</h3><p>Make sure <b>faults.js</b> is in the same folder as index.html.</p></div>';
     return;
   }
 
-  result.innerHTML=matches.map(renderFault).join("");
-}
-
-function renderFault(fault){
-  return `<div class="card">
-    <span class="badge">${escapeHtml(fault.manufacturer)}</span>
-    <h2 class="result-title">${escapeHtml(fault.title)}</h2>
-    <p><b>Fault Code:</b> ${escapeHtml(fault.code)}</p>
-    <p><b>System:</b> ${escapeHtml(fault.system || "Not specified")}</p>
-    ${fault.description ? `<p><b>Description:</b> ${escapeHtml(fault.description)}</p>` : ""}
-    <p><b>Source:</b> ${escapeHtml(fault.source || "Database entry")}</p>
-    ${fault.checks ? `<h3>Recommended Checks</h3><ol>${fault.checks.map(c=>`<li>${escapeHtml(c)}</li>`).join("")}</ol>` : ""}
-  </div>`;
-}
-
-function escapeHtml(value){
-  return String(value).replace(/[&<>"']/g,ch=>({
-    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
-  }[ch]));
-}
-
-document.addEventListener("DOMContentLoaded",()=>{
-  const input=document.getElementById("search");
-  input.addEventListener("keydown",event=>{
-    if(event.key==="Enter") searchFault();
+  const q=normalise(input);
+  const matches=window.faultDatabase.filter(f=>{
+    return [f.code,f.title,f.system,f.manufacturer,f.description,f.source]
+      .some(value=>normalise(value).includes(q));
   });
+
+  if(!matches.length){
+    result.innerHTML='<div class="card"><h3>No Fault Found</h3><p>The search <b>'+
+      escapeHtml(input)+'</b> is not in the current database.</p></div>';
+    return;
+  }
+
+  result.innerHTML=matches.map(f=>`
+    <div class="card">
+      <span class="badge">${escapeHtml(f.manufacturer)}</span>
+      <h2>${escapeHtml(f.title)}</h2>
+      <p><b>Fault Code:</b> ${escapeHtml(f.code)}</p>
+      <p><b>System:</b> ${escapeHtml(f.system)}</p>
+      ${f.description?`<p><b>Description:</b> ${escapeHtml(f.description)}</p>`:""}
+      <p><b>Source:</b> ${escapeHtml(f.source)}</p>
+    </div>
+  `).join("");
+}
+
+document.addEventListener("DOMContentLoaded",function(){
+  const button=document.getElementById("searchButton");
+  const input=document.getElementById("search");
+
+  button.addEventListener("click",searchFault);
+  input.addEventListener("keydown",function(e){
+    if(e.key==="Enter") searchFault();
+  });
+
+  // Useful test: confirms the database is loaded.
+  console.log("Earthmover Assist: "+faultDatabase.length+" fault records loaded.");
 });
